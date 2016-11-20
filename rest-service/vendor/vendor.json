@@ -1,0 +1,65 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "z9ckOyaoHErgXLQDx514AOMxdeo=",
+			"path": "github.com/Sirupsen/logrus",
+			"revision": "abc6f20dabf4b10195f233ad21ea6c5ba33acae0",
+			"revisionTime": "2016-11-11T12:09:51Z"
+		},
+		{
+			"checksumSHA1": "F1utsFXSpgUtjxIZK8dyT5+Hi34=",
+			"path": "github.com/containernetworking/cni/pkg/ip",
+			"revision": "46e3a6b7be5061ad6c9eb879880bcac149f2a833",
+			"revisionTime": "2016-11-17T16:00:31Z"
+		},
+		{
+			"checksumSHA1": "7EAbon9WTkJbY+IhUwNdK9Ip2qg=",
+			"path": "github.com/containernetworking/cni/pkg/ns",
+			"revision": "46e3a6b7be5061ad6c9eb879880bcac149f2a833",
+			"revisionTime": "2016-11-17T16:00:31Z"
+		},
+		{
+			"checksumSHA1": "8rJLO5vv9q+KlPwkS1mnNm9zxxY=",
+			"path": "github.com/containernetworking/cni/pkg/utils/hwaddr",
+			"revision": "46e3a6b7be5061ad6c9eb879880bcac149f2a833",
+			"revisionTime": "2016-11-17T16:00:31Z"
+		},
+		{
+			"checksumSHA1": "8s6lHDs2cnGicy0zrJW4ybIYtgI=",
+			"path": "github.com/coreos/go-iptables/iptables",
+			"revision": "5463fbac3bcc6b990663941c2e12660d19f6b36d",
+			"revisionTime": "2016-09-07T22:01:51Z"
+		},
+		{
+			"checksumSHA1": "mogxIUE7jVw23dIEWLOSfD07kk4=",
+			"path": "github.com/orcaman/concurrent-map",
+			"revision": "c00bc11d3715eded4bdbd4476efbbac286738e6e",
+			"revisionTime": "2016-11-06T09:36:03Z"
+		},
+		{
+			"checksumSHA1": "D1iNDAY5wcSVkqLpYmebJm3uGnA=",
+			"path": "github.com/vishvananda/netlink",
+			"revision": "17ea11b5a11c5614597c65a671105e8ee58c4d04",
+			"revisionTime": "2016-11-10T22:01:03Z"
+		},
+		{
+			"checksumSHA1": "qKneIoHTQHLsL2EF1Zl3S7S++gk=",
+			"path": "github.com/vishvananda/netlink/nl",
+			"revision": "17ea11b5a11c5614597c65a671105e8ee58c4d04",
+			"revisionTime": "2016-11-10T22:01:03Z"
+		},
+		{
+			"checksumSHA1": "zjfUA3qOv6grhBLpyJ+7EejXWQE=",
+			"path": "github.com/vishvananda/netns",
+			"revision": "8ba1072b58e0c2a240eb5f6120165c7776c3e7b8",
+			"revisionTime": "2016-04-30T05:37:23Z"
+		},
+		{
+			"path": "golang.org/x/sys/unix",
+			"revision": ""
+		}
+	],
+	"rootPath": "ipam-htsc/rest-service"
+}
