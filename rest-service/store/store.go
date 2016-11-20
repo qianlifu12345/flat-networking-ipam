@@ -133,9 +133,6 @@ func LoadIPAMConfig() cmap.ConcurrentMap {
 			case "gateway":
 				subnetwork.Gateway = net.ParseIP(substrs[1])
 				continue ll
-			case "dns":
-				subnetwork.DNS = net.ParseIP(substrs[1])
-				continue ll
 			case "rangeStart":
 				subnetwork.RangeStart = net.ParseIP(substrs[1])
 				continue ll

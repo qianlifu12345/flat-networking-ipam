@@ -17,8 +17,7 @@ type Subnetwork struct {
 	RangeStart     net.IP   `json:"range-start,omitempty"`
 	RangeEnd       net.IP   `json:"range-end,omitempty"`
 	Gateway        net.IP   `json:"gateway,omitempty"`
-	DNS            net.IP   `json:"dns,omitempty"`
-	Ips            []net.IP //`json:"-"`
+	Ips            []net.IP `json:"ips,omitempty"`
 	LastReservedIP net.IP   `json:"-"`
 }
 
@@ -27,7 +26,6 @@ func (s *Subnetwork) String() string {
 	var buf bytes.Buffer
 	fmt.Fprintf(&buf, "subnet=%v\n", s.Subnet.String())
 	fmt.Fprintf(&buf, "gateway=%v\n", s.Gateway)
-	fmt.Fprintf(&buf, "dns=%v\n", s.DNS)
 	fmt.Fprintf(&buf, "rangeStart=%v\n", s.RangeStart)
 	fmt.Fprintf(&buf, "rangeEnd=%v\n", s.RangeEnd)
 	return buf.String()
@@ -220,5 +218,5 @@ func (n *IPNet) UnmarshalJSON(data []byte) error {
 // ReservedIP define
 type ReservedIP struct {
 	IP net.IP `json:"ip"`
-	Gateway net.IP `json:"gateway"`
+	Gateway net.IP `json:"gateway,omitempty"`
 }

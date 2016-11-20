@@ -77,7 +77,21 @@ func (c *IPController) Post() {
 
 //Get get method
 func (c *IPController) Get() {
-	c.Data["json"] = &subnetMap
+	var list *[]model.ReservedIP
+	for _, k := range subnetMap.Keys() {
+		tmp, ok := subnetMap.Get(k)
+		if !ok{
+			c.Error(http.StatusInternalServerError,"internal error")
+		}
+		subnet := tmp.(*model.Subnetwork)
+		ips := &(subnet.Ips)
+
+		for _,ip:=range *ips{
+			*list=append(*list,model.ReservedIP{IP: ip, Gateway: subnet.Gateway})
+		}
+	}
+	v:= struct {data *[]model.ReservedIP}{data:list}
+	c.Data["json"] = &v
 	c.ServeJSON()
 }
 
