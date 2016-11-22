@@ -128,7 +128,7 @@ func LoadIPAMConfig() cmap.ConcurrentMap {
 				if err != nil {
 					return nil
 				}
-				subnetwork.Subnet = (model.IPNet)(*subnet)
+				subnetwork.Subnet = (*model.IPNet)(subnet)
 				continue ll
 			case "gateway":
 				subnetwork.Gateway = net.ParseIP(substrs[1])
@@ -145,7 +145,7 @@ func LoadIPAMConfig() cmap.ConcurrentMap {
 			}
 
 		}
-		if &(subnetwork.Subnet) != nil {
+		if subnetwork.Subnet != nil {
 			subnetMap.Set(subnetwork.Subnet.String(), &subnetwork)
 		}
 

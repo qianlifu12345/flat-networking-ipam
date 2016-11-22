@@ -19,7 +19,6 @@ type SubnetworkController struct {
 var subnetMap = store.LoadIPAMConfig()
 
 //Post post method
-// @router /subnet [post]
 func (c *SubnetworkController) Post() {
 	var req model.Subnetwork
 
@@ -28,6 +27,7 @@ func (c *SubnetworkController) Post() {
 		return
 	}
 	if subnetMap.Has(req.Subnet.String()) {
+		c.Error(http.StatusNotAcceptable, "subnet exists")
 		return
 	}
 	subnetMap.Set(req.Subnet.String(), &req)
@@ -38,14 +38,12 @@ func (c *SubnetworkController) Post() {
 }
 
 //Get get method
-// @router /subnet/ [get]
 func (c *SubnetworkController) Get() {
 	c.Data["json"] = &subnetMap
-	c.ServeJSON()
+	c.ServeJSON() 
 }
 
 //Delete delete method
-// @router /subnet [delete]
 func (c *SubnetworkController) Delete() {
 	var subnet = c.GetString("subnet")
 	subnetMap.Remove(subnet)

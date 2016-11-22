@@ -80,19 +80,31 @@ func (c *IPController) Get() {
 	var list *[]model.ReservedIP
 	for _, k := range subnetMap.Keys() {
 		tmp, ok := subnetMap.Get(k)
-		if !ok{
-			c.Error(http.StatusInternalServerError,"internal error")
+		if !ok {
+			c.Error(http.StatusInternalServerError, "internal error")
 		}
-		subnet := tmp.(*model.Subnetwork)
+		subnet, ok := tmp.(*model.Subnetwork)
+		if !ok {
+			c.Error(http.StatusInternalServerError, "internal error")
+		}
 		ips := &(subnet.Ips)
 
-		for _,ip:=range *ips{
-			*list=append(*list,model.ReservedIP{IP: ip, Gateway: subnet.Gateway})
+		for _, ip := range *ips {
+			if list == nil {
+				*list = []model.ReservedIP{model.ReservedIP{IP: ip, Gateway: subnet.Gateway}}
+			} else {
+				*list = append(*list, model.ReservedIP{IP: ip, Gateway: subnet.Gateway})
+			}
 		}
 	}
-	v:= struct {data *[]model.ReservedIP}{data:list}
+	v := ResponseIP{Data: *list, Type: "collection"}
 	c.Data["json"] = &v
 	c.ServeJSON()
+}
+
+type ResponseIP struct {
+	Type string             `json:"type"`
+	Data []model.ReservedIP `json:"data"`
 }
 
 //Delete delete method

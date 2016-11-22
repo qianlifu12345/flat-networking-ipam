@@ -7,13 +7,13 @@ import (
 	// "github.com/containernetworking/cni/pkg/types"
 	// "github.com/containernetworking/cni/pkg/ip"
 	"encoding/json"
-	"math/big"
 	"errors"
+	"math/big"
 )
 
 // Subnetwork define
 type Subnetwork struct {
-	Subnet         IPNet    `json:"subnet"`
+	Subnet         *IPNet   `json:"subnet"`
 	RangeStart     net.IP   `json:"range-start,omitempty"`
 	RangeEnd       net.IP   `json:"range-end,omitempty"`
 	Gateway        net.IP   `json:"gateway,omitempty"`
@@ -24,16 +24,24 @@ type Subnetwork struct {
 // String stringer for Subnetwork".
 func (s *Subnetwork) String() string {
 	var buf bytes.Buffer
-	fmt.Fprintf(&buf, "subnet=%v\n", s.Subnet.String())
-	fmt.Fprintf(&buf, "gateway=%v\n", s.Gateway)
-	fmt.Fprintf(&buf, "rangeStart=%v\n", s.RangeStart)
-	fmt.Fprintf(&buf, "rangeEnd=%v\n", s.RangeEnd)
+	if s.Subnet != nil {
+		fmt.Fprintf(&buf, "subnet=%v\n", s.Subnet.String())
+	}
+	if s.Gateway != nil {
+		fmt.Fprintf(&buf, "gateway=%v\n", s.Gateway)
+	}
+	if s.RangeStart != nil {
+		fmt.Fprintf(&buf, "rangeStart=%v\n", s.RangeStart)
+	}
+	if s.RangeEnd != nil {
+		fmt.Fprintf(&buf, "rangeEnd=%v\n", s.RangeEnd)
+	}
 	return buf.String()
 }
 
 // NextIP find
 func (s *Subnetwork) NextIP() (net.IP, error) {
-	start, end, err := networkRange((*net.IPNet)(&s.Subnet))
+	start, end, err := networkRange((*net.IPNet)(s.Subnet))
 	if err != nil {
 		return nil, err
 	}
@@ -49,18 +57,18 @@ func (s *Subnetwork) NextIP() (net.IP, error) {
 	return findNextIPInRange(&start, &end, &s.LastReservedIP, &s.Ips)
 }
 
-func findNextIPInRange(start, end, curIP *net.IP, ips *[]net.IP) (net.IP,error) {
+func findNextIPInRange(start, end, curIP *net.IP, ips *[]net.IP) (net.IP, error) {
 	newIP := next(start, end, curIP)
-	for Contains(&newIP,ips) {
+	for Contains(&newIP, ips) {
 		newIP = next(start, end, &newIP)
-		if newIP.Equal(*curIP){
-			return nil,errors.New("no available IP could be apply")
+		if newIP.Equal(*curIP) {
+			return nil, errors.New("no available IP could be apply")
 		}
 	}
-	return newIP,nil
+	return newIP, nil
 }
 
-func next(start, end, curIP *net.IP) net.IP{
+func next(start, end, curIP *net.IP) net.IP {
 	if (*curIP).Equal(*end) {
 		return *start
 	}
@@ -69,7 +77,8 @@ func next(start, end, curIP *net.IP) net.IP{
 	return newIP
 }
 
-func Contains(curIP *net.IP, ips *[]net.IP) bool{
+// Contains judge whether the specified ip within IPs
+func Contains(curIP *net.IP, ips *[]net.IP) bool {
 	for _, k := range *ips {
 		if curIP.Equal(k) {
 			return true
@@ -84,6 +93,7 @@ func ipToInt(ip net.IP) *big.Int {
 	}
 	return big.NewInt(0).SetBytes(ip.To16())
 }
+
 func intToIP(i *big.Int) net.IP {
 	return net.IP(i.Bytes())
 }
@@ -190,7 +200,7 @@ func ParseCIDR(s string) (*net.IPNet, error) {
 	return ipn, nil
 }
 
-func (n *IPNet) String() string{
+func (n *IPNet) String() string {
 	return ((*net.IPNet)(n)).String()
 }
 
@@ -217,6 +227,6 @@ func (n *IPNet) UnmarshalJSON(data []byte) error {
 
 // ReservedIP define
 type ReservedIP struct {
-	IP net.IP `json:"ip"`
+	IP      net.IP `json:"ip"`
 	Gateway net.IP `json:"gateway,omitempty"`
 }

@@ -5,7 +5,7 @@ import (
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/astaxie/beego"
-	"os"
+	// "os"
 )
 
 func main() {
@@ -15,7 +15,6 @@ func main() {
 }
 
 func initBeego() { 
-	os.Getenv("IPAM");
 	beego.RESTRouter("/subnet",&controller.SubnetworkController{})
 	beego.RESTRouter("/ip",&controller.IPController{})
 }
