@@ -7,8 +7,8 @@ import (
 
 	"fmt"
 
-	"ipam-htsc/rest-service/model"
-	"ipam-htsc/rest-service/store"
+	"github.com/qianlifu12345/flat-networking-ipam/rest-service/model"
+	"github.com/qianlifu12345/flat-networking-ipam/rest-service/store"
 )
 
 //SubnetworkController implement BaseController
@@ -40,7 +40,7 @@ func (c *SubnetworkController) Post() {
 //Get get method
 func (c *SubnetworkController) Get() {
 	c.Data["json"] = &subnetMap
-	c.ServeJSON() 
+	c.ServeJSON()
 }
 
 //Delete delete method

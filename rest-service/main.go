@@ -1,11 +1,10 @@
 package main
 
 import (
-	"ipam-htsc/rest-service/controller"
+	"github.com/qianlifu12345/flat-networking-ipam/rest-service/controller"
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/astaxie/beego"
-	// "os"
 )
 
 func main() {
@@ -14,7 +13,7 @@ func main() {
 	beego.Run(":8080")
 }
 
-func initBeego() { 
-	beego.RESTRouter("/subnet",&controller.SubnetworkController{})
-	beego.RESTRouter("/ip",&controller.IPController{})
+func initBeego() {
+	beego.RESTRouter("/subnet", &controller.SubnetworkController{})
+	beego.RESTRouter("/ip", &controller.IPController{})
 }

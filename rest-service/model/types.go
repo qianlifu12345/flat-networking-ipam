@@ -2,13 +2,11 @@ package model
 
 import (
 	"bytes"
-	"fmt"
-	"net"
-	// "github.com/containernetworking/cni/pkg/types"
-	// "github.com/containernetworking/cni/pkg/ip"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"math/big"
+	"net"
 )
 
 // Subnetwork define

@@ -3,10 +3,11 @@ package store
 import (
 	"bufio"
 	"errors"
-	"ipam-htsc/rest-service/model"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/qianlifu12345/flat-networking-ipam/rest-service/model"
 
 	cmap "github.com/orcaman/concurrent-map"
 
@@ -17,7 +18,7 @@ import (
 	"github.com/astaxie/beego"
 )
 
-var defaultDataDir = "/var/lib/cni/networks"
+var defaultDataDir = "./"
 
 func init() {
 	dataDir := beego.AppConfig.String("dataPath")

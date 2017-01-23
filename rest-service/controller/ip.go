@@ -7,10 +7,11 @@ import (
 
 	"fmt"
 
-	"ipam-htsc/rest-service/model"
-	// "github.com/containernetworking/cni/pkg/ip"
-	"ipam-htsc/rest-service/store"
 	"net"
+
+	"github.com/qianlifu12345/flat-networking-ipam/rest-service/model"
+
+	"github.com/qianlifu12345/flat-networking-ipam/rest-service/store"
 )
 
 //IPController implement BaseController
